@@ -101,6 +101,7 @@ void flipBetweenHashes(const char* sentence)
 		}
 		sentence++;
 	}
+	printf("\n");
 }
 
 
@@ -123,7 +124,7 @@ int isPalindrome(Stack* s)
 		printf("memory allocation problem\n");
 		exit(1);
 	}
-	while (s->head->next) { // input the varuble's from the stack that we got from the user into new stack and sentence
+	while (isEmptyStack(s) == 1) { // input the varuble's from the stack that we got from the user into new stack and sentence
 		*(sentence + counter) = pop(s);
 		push(c_s, *(sentence + counter));
 		counter++;
