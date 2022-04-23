@@ -89,3 +89,6 @@ void cutAndReplace(Queue* q);
 /// </summary>
 /// <param name="s"></param>
 void sortKidsFirst(Queue* q);
+
+intNode* newNode(int k);
+void printList(Queue* q);
