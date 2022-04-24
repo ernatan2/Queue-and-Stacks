@@ -11,16 +11,13 @@ void initQueue(Queue* q)
 
 void destroyQueue(Queue* q)
 {
-	if (!q || !q->head){
+	if (!q->head->data) {
 		return;
 	}
-	intNode* current = q->head, *tmp =NULL;
-	while (current->next) {
-		tmp = current->next;
-		free(current);
-		current = tmp;
-	}
+	free(q->head->data);
+	destroyQueue(q->head->next);
 }
+
 void enqueue(Queue* q, unsigned int data)
 {
 	intNode* temp = newNode(data);

@@ -34,7 +34,7 @@ void push(Stack* s, char data)
 
 char pop(Stack* s)
 {
-	int res;
+	char res;
 	res = s->head->data;
 	removeItem(&(s->head));
 	return (res);
@@ -47,6 +47,21 @@ int isEmptyStack(const Stack* s)
 		return 1;
 	}
 	return 0;
+}
+
+void printStack(Stack* s)
+{
+	charNode* ptr = s->head;
+	if (!s)
+	{
+		printf("Stack is empty\n");
+		return;
+	}
+	while (ptr->next != NULL)
+	{
+		printf("%c\n", ptr->data);
+		ptr = ptr->next;
+	}
 }
 
 /*************** Functions using stacks - Implementation/definition **************************/
@@ -124,7 +139,7 @@ int isPalindrome(Stack* s)
 		printf("memory allocation problem\n");
 		exit(1);
 	}
-	while (isEmptyStack(s) == 1) { // input the varuble's from the stack that we got from the user into new stack and sentence
+	while (s->head->next) { // input the varuble's from the stack that we got from the user into new stack and sentence
 		*(sentence + counter) = pop(s);
 		push(c_s, *(sentence + counter));
 		counter++;
@@ -149,7 +164,47 @@ int isPalindrome(Stack* s)
 
 void rotateStack(Stack* s, int n)
 {
-	// add your code here
+	if (n <= 0)
+		return;
+	Stack* top_st = NULL;
+	Stack* buttom_st = NULL;
+	top_st = (Stack*)malloc(sizeof(Stack));
+	if (!top_st) {
+		printf("Allocation memory problem\n");
+		exit(1);
+	}
+	initStack(top_st);
+	buttom_st = (Stack*)malloc(sizeof(Stack));
+	if (!buttom_st) {
+		printf("Allocation memory problem\n");
+		exit(1);
+	}
+	initStack(buttom_st);
+	int sum = 0;
+	charNode* current = s->head;
+	while (current)
+	{
+		current = current->next;
+		sum++;
+	}
+	char tmp;
+	for (n; n < sum; n++)
+	{
+		tmp = pop(s);
+		push(top_st, tmp);
+	}
+	for (int i = 0; i < (sum - n); i++)
+	{
+		push(buttom_st, pop(s));
+	}
+	for (n; n < sum; n++)
+	{
+		push(s, pop(top_st));
+	}
+	for (int i = 0; i < (sum - n); i++)
+	{
+		push(s, pop(buttom_st));
+	}
 }
 
 charNode *addToHead(charNode* head, charNode* toAdd) {

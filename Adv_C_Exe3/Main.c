@@ -14,12 +14,28 @@ void main()
 		exit(1);
 	}
 	int i;
+	s->head = NULL;
+	push(s, '\0');
 	for (i = 0; sentence[i] != '\0'; i++) {
 		push(s, sentence[i]);
 	}
-
-	isPalindrome(s);
 	flipBetweenHashes(check);
+	if(isPalindrome(s) == 1) {
+		printf("The sentence is Palindrome\n");
+	}
+	else {
+		printf("The sentence isn't Palindrome\n");
+	}
+	initStack(s);
+	push(s, 'A');
+	push(s, 'B');
+	push(s, 'C');
+	push(s, 'D');
+	push(s, 'E');
+	push(s, 'F');
+	rotateStack(s, 3);
+	printStack(s);
+	destroyStack(s);
 
 	Queue* q = NULL;
 	q = (Queue*)malloc(sizeof(Queue));
@@ -36,18 +52,16 @@ void main()
 	}
 	printf("\n");
 
-	printf("Checing if the function rotateQueue working: ");
 	rotateQueue(q);
+	printf("Check if the function rotateQueue is working:");
 	printList(q);
 
-
-	printf("Checing if the function cutAndReplace working: ");
 	cutAndReplace(q);
+	printf("Check if the function cutAndReplace is working:");
 	printList(q);
 
-	printf("Checing if the function sortKidsFirst working: ");
 	sortKidsFirst(q);
+	printf("Check if the function sortKidsFirst is working:");
 	printList(q);
 	destroyQueue(q);
-
 }
