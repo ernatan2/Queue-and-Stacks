@@ -190,8 +190,8 @@ void rotateStack(Stack* s, int n)
 	char tmp;
 	for (n; n < sum; n++)
 	{
-		tmp = pop(s);
-		push(top_st, tmp);
+
+		push(top_st, pop(s));
 	}
 	for (int i = 0; i < (sum - n); i++)
 	{

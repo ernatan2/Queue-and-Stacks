@@ -91,4 +91,5 @@ void cutAndReplace(Queue* q);
 void sortKidsFirst(Queue* q);
 
 intNode* newNode(int k);
-void printList(Queue* q);
+void printQueue(Queue* q);
+int counter(Queue* q);

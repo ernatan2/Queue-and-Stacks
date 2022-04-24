@@ -67,13 +67,77 @@ void printList(Queue* q) {
 
 void rotateQueue(Queue* q)
 {
-	return;
+	int q_lenght = counter(q);
+	Queue* temp_q = NULL;
+	temp_q = (Queue*)malloc(sizeof(Queue));
+	if (!temp_q) {
+		printf("Allocation memory problem\n");
+		exit(1);
+	}
+	initQueue(temp_q);
+	for (int i = 1; i < q_lenght; i++)
+	{
+		enqueue(temp_q, dequeue(q));
+	}
+	for (int i = 1; i < q_lenght; i++)
+	{
+		enqueue(q, dequeue(temp_q));
+	}
+
 }
 
 void cutAndReplace(Queue* q)
 {
-	return;
+	int q_lenght = counter(q);
+	if ((q_lenght % 2) != 0)
+	{
+		int sum = 0;
+		for (int i = 0; i < q_lenght; i++)
+		{
+			int x = dequeue(q);
+			sum += x;
+			enqueue(q, x);
+		}
+		int new_tail = sum / q_lenght; //new_tail will represents the averge of all nodes in the queue .
+		enqueue(q, new_tail);
+		q_lenght++;
+	}
+
+	Queue* new_head_half = NULL;
+	Queue* new_tail_half = NULL;
+	new_head_half = (Queue*)malloc(sizeof(Queue));
+	if (!new_head_half) {
+		printf("Allocation memory problem \n");
+		exit(1);
+	}
+	initQueue(new_head_half);
+	new_tail_half = (Queue*)malloc(sizeof(Queue));
+	if (!new_tail_half) {
+		printf("Allocation memory problem\n");
+		exit(1);
+	}
+	initQueue(new_tail_half);
+
+	for (int i = 0; i < q_lenght / 2; i++)
+	{
+		enqueue(new_tail_half, dequeue(q));
+	}
+	for (int i = 0; i < q_lenght / 2; i++)
+	{
+		enqueue(new_head_half, dequeue(q));
+	}
+	for (int i = 0; i < q_lenght / 2; i++)
+	{
+		rotateQueue(new_head_half);
+		enqueue(q, dequeue(new_head_half));
+	}
+	for (int i = 0; i < q_lenght / 2; i++)
+	{
+		enqueue(q, dequeue(new_tail_half));
+	}
 }
+
+
 
 void sortKidsFirst(Queue* q)
 {
@@ -127,4 +191,33 @@ intNode* newNode(int k)
 	temp->data = k;
 	temp->next = NULL;
 	return temp;
+}
+
+void printQueue(Queue* q)
+{
+	intNode* ptr = q->head;
+	if (!q)
+	{
+		printf("Queue is empty\n");
+		return;
+	}
+	while (ptr->next != NULL)
+	{
+		printf("%d -> ", ptr->data);
+		ptr = ptr->next;
+	}
+	printf("%d", q->tail->data);
+
+}
+
+int counter(Queue* q)
+{
+	intNode* temp = q->head;
+	int count = 1;
+	while (temp->next != NULL)
+	{
+		temp = temp->next;
+		count++;
+	}
+	return count;
 }

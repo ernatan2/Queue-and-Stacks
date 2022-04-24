@@ -37,7 +37,7 @@ void main()
 	printStack(s);
 	destroyStack(s);
 
-	Queue* q = NULL;
+	/*Queue* q = NULL;
 	q = (Queue*)malloc(sizeof(Queue));
 	if (!q) {
 		printf("Allocation memory problem\n");
@@ -54,14 +54,39 @@ void main()
 
 	rotateQueue(q);
 	printf("Check if the function rotateQueue is working:");
-	printList(q);
+	printQueue(q);
 
 	cutAndReplace(q);
 	printf("Check if the function cutAndReplace is working:");
-	printList(q);
+	printQueue(q);
 
 	sortKidsFirst(q);
 	printf("Check if the function sortKidsFirst is working:");
-	printList(q);
-	destroyQueue(q);
+	printQueue(q);
+	destroyQueue(q);*/
+
+	Queue* q = NULL;
+	q = (Queue*)malloc(sizeof(Queue));
+	if (!q) {
+		printf("Allocation memory problem\n");
+		exit(1);
+	}
+	initQueue(q);
+	enqueue(q, 6);
+	enqueue(q, 1);
+	enqueue(q, 5);
+	enqueue(q, 2);
+	enqueue(q, 3);
+	enqueue(q, 1);
+	enqueue(q, 9);
+	//cutAndReplace function cheack: //////
+	printf("the current queue : ");
+	printQueue(q);
+	cutAndReplace(q);
+	printf("\nthe queue after cutandreplace: ");
+	printQueue(q);
+	//rotateQueue function cheack: //////
+	rotateQueue(q);
+	printf("\nthe queue after rotate: ");
+	printQueue(q);
 }
